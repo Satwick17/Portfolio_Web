@@ -3,6 +3,8 @@ import ErrorHandler from "../middleware/error.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { generateToken } from "../utils/jwtToken.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 export const register = catchAssyncError(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -204,4 +206,55 @@ export const getUserPortfolio = catchAssyncError(async (req, res, next) => {
     success: true,
     user,
   });
+});
+
+//Forgot Password
+export const forgotPassword = catchAssyncError(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return next(new ErrorHandler("User Not Found!", 404));
+  const resetToken = user.getResetPasswordToken();
+  await user.save({ validateBeforeSave: false });
+  const resetPasswordUrl = `${process.env.DASHBOARD_URL}/password/reset/${resetToken}`;
+  const message = `This is your reset password link: \n\n ${resetPasswordUrl}\n\n If haven't requested by you, Please Ignore!`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Dashboard Recovery Password",
+      message,
+    });
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully!`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+//Reset Password
+export const resetPassword = catchAssyncError(async (req, res, next) => {
+  const { token } = req.params;
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+  if (!user) {
+    return next(new ErrorHandler("Reset Password Token is expired!", 400));
+  }
+  if (req.body.password !== req.body.confirmPassword)
+    new ErrorHandler("New Password and Confirm Password are different", 400);
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+  generateToken(user, "Password Changed!", 200, res);
 });
