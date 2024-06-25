@@ -120,7 +120,7 @@ export const getAllProject = catchAssyncError(async (req, res, next) => {
   const projects = await Projects.find();
   res.status(200).json({
     success: true,
-    projects,
+    projects,  
   });
 });
 
