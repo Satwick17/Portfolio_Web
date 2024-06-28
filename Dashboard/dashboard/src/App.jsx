@@ -10,12 +10,21 @@ import ManageTimeline from "./pages/ManageTimeline";
 import ResetPassword from "./pages/ResetPassword";
 import UpdateProject from "./pages/UpdateProject";
 import ViewProject from "./pages/ViewProject";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./store/slices/userSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  },[]);
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
