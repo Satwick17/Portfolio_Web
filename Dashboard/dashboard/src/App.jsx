@@ -17,9 +17,9 @@ import { getUser } from "./store/slices/userSlice";
 const App = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUser());
-  },[]);
+  // useEffect(() => {
+  //   dispatch(getUser());
+  // },[]);
 
   return (
     <Router>
