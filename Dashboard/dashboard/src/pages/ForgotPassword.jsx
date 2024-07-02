@@ -1,4 +1,7 @@
-import { forgotPassword } from "@/store/slices/forgotRestPassSlice";
+import {
+  clearAllForgotResetPassErrors,
+  forgotPassword,
+} from "@/store/slices/forgotRestPassSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +25,10 @@ const ForgotPassword = () => {
   };
 
   useEffect(() => {
-    if (error) toast.error(error);
+    if (error) {
+      toast.error(error);
+      dispatch(clearAllForgotResetPassErrors());
+    }
     if (isAuthenticated) navigate("/");
     if (message !== null) toast.success(message);
   }, [dispatch, isAuthenticated, error, loading]);
