@@ -32,6 +32,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import Dashboard from "./special_Components/Dashboard";
+import AddProject from "./special_Components/AddProject";
+import AddSkills from "./special_Components/AddSkills";
+import AddApplications from "./special_Components/AddApplications";
+import AddTimeline from "./special_Components/AddTimeline";
+import Messages from "./special_Components/Messages";
+import Account from "./special_Components/Account";
 
 const Home = () => {
   const [active, setActive] = useState("");
@@ -57,7 +64,7 @@ const Home = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <aside className="fixed inset-y-0 left-0  w-14 flex-col border-r bg-background sm:flex z-50">
+      <aside className="fixed inset-y-0 left-0 w-14 flex-col border-r bg-background sm:flex z-50">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <Link className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base">
             <Package className="h-4 w-4 transition-all group-hover:scale-110" />
@@ -327,11 +334,39 @@ const Home = () => {
             alt="avatar"
             className="w-20 h-20 rounded-full max-[900px]:hidden"
           />
-          <h1 className="text-4xl max-[900px]:text-2xl">
+          <h1 className="text-3xl max-[900px]:text-2xl">
             Welcome back, {user.fullName}
           </h1>
         </div>
       </header>
+      {(() => {
+        switch (active) {
+          case "Dashboard":
+            return <Dashboard />;
+            break;
+          case "Add Project":
+            return <AddProject />;
+            break;
+          case "Add Skill":
+            return <AddSkills />;
+            break;
+          case "Add Uses":
+            return <AddApplications />;
+            break;
+          case "Add Timeline":
+            return <AddTimeline />;
+            break;
+          case "Messages":
+            return <Messages />;
+            break;
+          case "Account":
+            return <Account />;
+            break;
+          default:
+            return <Dashboard />;
+            break;
+        }
+      })()}
     </div>
   );
 };
