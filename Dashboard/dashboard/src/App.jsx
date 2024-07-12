@@ -14,13 +14,15 @@ import ViewProject from "./pages/ViewProject";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlice";
+import { getAllMessages } from "./store/slices/messageSlice";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getUser());
-  // },[]);
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getAllMessages());
+  }, []);
 
   return (
     <Router>
