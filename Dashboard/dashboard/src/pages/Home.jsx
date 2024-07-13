@@ -152,17 +152,17 @@ const Home = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                    active === "Add Timline"
+                    active === "Add Timeline"
                       ? "text-accent-foreground bg-accent"
                       : "text-muted-foreground"
                   }  transition-colors hover:text-foreground md:h-8 md:w-8`}
-                  onClick={() => setActive("Add Timline")}
+                  onClick={() => setActive("Add Timeline")}
                 >
                   <History className="h-5 w-5" />
-                  <span className="sr-only">Add Timline</span>
+                  <span className="sr-only">Add Timeline</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Add Timline</TooltipContent>
+              <TooltipContent side="right">Add Timeline</TooltipContent>
             </Tooltip>
           </TooltipProvider>
 
@@ -296,11 +296,11 @@ const Home = () => {
               </Link>
               <Link
                 className={`flex items-center gap-4 px-2.5 ${
-                  active === "Timeline"
+                  active === "Add Timeline"
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground "
                 }`}
-                onClick={() => setActive("Timeline")}
+                onClick={() => setActive("Add Timeline")}
               >
                 <History className="h-5 w-5" />
                 Timeline
