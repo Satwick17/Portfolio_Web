@@ -133,17 +133,17 @@ const Home = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                    active === "Add Uses"
+                    active === "Add User"
                       ? "text-accent-foreground bg-accent"
                       : "text-muted-foreground"
                   }  transition-colors hover:text-foreground md:h-8 md:w-8`}
-                  onClick={() => setActive("Add Uses")}
+                  onClick={() => setActive("Add User")}
                 >
                   <LayoutGrid className="h-5 w-5" />
-                  <span className="sr-only">Add Uses</span>
+                  <span className="sr-only">Add User</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Add Uses</TooltipContent>
+              <TooltipContent side="right">Add User</TooltipContent>
             </Tooltip>
           </TooltipProvider>
 
@@ -347,7 +347,7 @@ const Home = () => {
           case "Add Project":
             return <AddProject />;
             break;
-          case "Add Skill":
+          case "Add Skills":
             return <AddSkills />;
             break;
           case "Add Uses":

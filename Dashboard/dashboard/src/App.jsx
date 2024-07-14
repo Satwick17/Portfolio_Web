@@ -15,6 +15,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlice";
 import { getAllMessages } from "./store/slices/messageSlice";
+import { getAllTimeline } from "./store/slices/timelineSlice";
+import { getAllSkill } from "./store/slices/skillSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,6 +24,8 @@ const App = () => {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getAllMessages());
+    dispatch(getAllTimeline());
+    dispatch(getAllSkill());
   }, []);
 
   return (

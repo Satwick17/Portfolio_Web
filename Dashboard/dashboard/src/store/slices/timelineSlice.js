@@ -76,7 +76,7 @@ export const getAllTimeline = () => async (dispatch) => {
       { withCredentials: true }
     );
     dispatch(
-      timelineSlice.actions.getAllTimelineSuccess(response.data.messages)
+      timelineSlice.actions.getAllTimelineSuccess(response.data.timelines)
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
@@ -109,7 +109,7 @@ export const deleteTimeline = (id) => async (dispatch) => {
 export const addNewTimeline = (newData) => async (dispatch) => {
   dispatch(timelineSlice.actions.deleteTimelineRequest());
   try {
-    const response = await axios.delete(
+    const response = await axios.post(
       `http://localhost:4000/api/v1/timeline/add`,
       newData,
       {
