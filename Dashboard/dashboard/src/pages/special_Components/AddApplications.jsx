@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const AddApplications = () => {
-  return (
-    <div>AddApplications</div>
-  )
-}
+  const [] = useState();
+  return <div></div>;
+};
 
-export default AddApplications
+export default AddApplications;
