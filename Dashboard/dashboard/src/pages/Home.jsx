@@ -350,7 +350,7 @@ const Home = () => {
           case "Add Skills":
             return <AddSkills />;
             break;
-          case "Add Uses":
+          case "Add User":
             return <AddApplications />;
             break;
           case "Add Timeline":

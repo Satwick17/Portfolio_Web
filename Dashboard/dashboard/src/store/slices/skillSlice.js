@@ -4,8 +4,8 @@ import axios from "axios";
 const skillSlice = createSlice({
   name: "skill",
   initialState: {
-    loading: false,
     skills: [],
+    loading: false,
     error: null,
     message: null,
   },
@@ -119,7 +119,7 @@ export const addNewSkill = (data) => async (dispatch) => {
   }
 };
 
-export const deleteSkill = () => async (dispatch) => {
+export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const { data } = await axios.delete(

@@ -17,6 +17,7 @@ const AddSkills = () => {
   const [svgPreview, setSvgPreview] = useState("");
 
   const handleSvg = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
