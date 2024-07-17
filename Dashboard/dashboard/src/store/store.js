@@ -4,7 +4,8 @@ import forgotRestPassReducer from "./slices/forgotRestPassSlice";
 import messageReducer from "./slices/messageSlice";
 import timelineReducer from "./slices/timelineSlice";
 import skillReducer from "./slices/skillSlice";
-import applicationReducer from "./slices/applicationSlice";
+import softwareApplicationReducer from "./slices/applicationSlice";
+import projectReducer from "./slices/projectSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     messages: messageReducer,
     timeline: timelineReducer,
     skill: skillReducer,
-    application: applicationReducer,
+    softwareApplication: softwareApplicationReducer,
+    project: projectReducer,
   },
 });

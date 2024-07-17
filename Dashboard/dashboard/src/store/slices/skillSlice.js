@@ -92,7 +92,7 @@ export const getAllSkill = () => async (dispatch) => {
         withCredentials: true,
       }
     );
-    dispatch(skillSlice.actions.getAllSkillsSuccess(data.skills));
+    dispatch(skillSlice.actions.getAllSkillsSuccess(data.skill));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(

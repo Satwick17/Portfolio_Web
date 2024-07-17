@@ -3,6 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
+import {
+  addNewSoftwareApplication,
+  clearAllSoftwareAppErrors,
+  getAllSoftwareApplications,
+  resetSoftwareApplicationSlice,
+} from "@/store/slices/applicationSlice";
 
 const AddApplications = () => {
   const [name, setName] = useState("");
@@ -19,22 +25,26 @@ const AddApplications = () => {
     };
   };
 
-  const { loading, message, error } = useSelector((state) => state.application);
+  const { loading, message, error } = useSelector((state) => state.softwareApplication);
   const dispatch = useDispatch();
 
   const handleAddSoftwareApp = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    
+    formData.append("name", name);
+    formData.append("svg", svg);
+    dispatch(addNewSoftwareApplication(formData));
   };
 
   useEffect(() => {
     if (error) {
       toast.error(error);
-     
+      dispatch(clearAllSoftwareAppErrors());
     }
     if (message) {
       toast.success(message);
+      dispatch(resetSoftwareApplicationSlice());
+      dispatch(getAllSoftwareApplications());
     }
   }, [dispatch, loading, error, message]);
 

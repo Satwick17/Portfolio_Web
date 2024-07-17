@@ -1,141 +1,157 @@
-import { CardTitle } from "@/components/ui/card";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const applicationSlice = createSlice({
-  name: "application",
+const softwareApplicationSlice = createSlice({
+  name: "softwareApplications",
   initialState: {
-    applications: [],
     loading: false,
+    softwareApplications: [],
     error: null,
     message: null,
   },
   reducers: {
-    getAllApplicationRequest(state, action) {
-      state.applications = [];
+    getAllsoftwareApplicationsRequest(state, action) {
+      state.softwareApplications = [];
       state.error = null;
       state.loading = true;
     },
-    getAllApplicationSuccess(state, action) {
-      state.applications = action.payload;
+    getAllsoftwareApplicationsSuccess(state, action) {
+      state.softwareApplications = action.payload;
       state.error = null;
       state.loading = false;
     },
-    getAllApplicationFailed(state, action) {
-      state.applications = state.applications;
+    getAllsoftwareApplicationsFailed(state, action) {
+      state.softwareApplications = state.softwareApplications;
       state.error = action.payload;
       state.loading = false;
     },
-    addNewApplicationRequest(state, action) {
+    addNewsoftwareApplicationsRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
-    addNewApplicationSuccess(state, action) {
+    addNewsoftwareApplicationsSuccess(state, action) {
       state.error = null;
       state.loading = false;
       state.message = action.payload;
     },
-    addNewApplicationFailed(state, action) {
+    addNewsoftwareApplicationsFailed(state, action) {
       state.error = action.payload;
       state.loading = false;
       state.message = null;
     },
-    deleteApplicationRequest(state, action) {
+    deletesoftwareApplicationsRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
-    deleteApplicationSuccess(state, action) {
+    deletesoftwareApplicationsSuccess(state, action) {
       state.error = null;
       state.loading = false;
       state.message = action.payload;
     },
-    deleteApplicationFailed(state, action) {
+    deletesoftwareApplicationsFailed(state, action) {
       state.error = action.payload;
       state.loading = false;
       state.message = null;
     },
-
-    resetApplicationSlice(state, action) {
+    resetSoftwareApplicationSlice(state, action) {
       state.error = null;
-      state.applications = state.applications;
+      state.softwareApplications = state.softwareApplications;
       state.message = null;
       state.loading = false;
     },
     clearAllErrors(state, action) {
       state.error = null;
-      state.applications = state.applications;
+      state.softwareApplications = state.softwareApplications;
     },
   },
 });
 
-export const getAllApplication = () => async (dispatch) => {
-  dispatch(applicationSlice.actions.getAllApplicationRequest());
+export const getAllSoftwareApplications = () => async (dispatch) => {
+  dispatch(
+    softwareApplicationSlice.actions.getAllsoftwareApplicationsRequest()
+  );
   try {
-    const { data } = await axios.get(
+    const response = await axios.get(
       "http://localhost:4000/api/v1/softwareAppliaction/getall",
       { withCredentials: true }
     );
     dispatch(
-      applicationSlice.actions.addNewApplicationSuccess(data.applications)
+      softwareApplicationSlice.actions.getAllsoftwareApplicationsSuccess(
+        response.data.softwareApplications
+      )
     );
-    dispatch(applicationSlice.actions.clearAllErrors());
+    dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      applicationSlice.actions.getAllApplicationFailed(
+      softwareApplicationSlice.actions.getAllsoftwareApplicationsFailed(
         error.response.data.message
       )
     );
   }
 };
 
-export const addNewApplication = (newData) => async (dispatch) => {
-  dispatch(applicationSlice.actions.addNewApplicationRequest());
+export const addNewSoftwareApplication = (data) => async (dispatch) => {
+  dispatch(
+    softwareApplicationSlice.actions.addNewsoftwareApplicationsRequest()
+  );
   try {
-    const { data } = await axios.post(
+    const response = await axios.post(
       "http://localhost:4000/api/v1/softwareAppliaction/add",
-      newData,
+      data,
       {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    dispatch(applicationSlice.actions.addNewApplicationSuccess(data.message));
-    dispatch(applicationSlice.actions.clearAllErrors());
+    dispatch(
+      softwareApplicationSlice.actions.addNewsoftwareApplicationsSuccess(
+        response.data.message
+      )
+    );
+    dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      applicationSlice.actions.addNewApplicationFailed(
+      softwareApplicationSlice.actions.addNewsoftwareApplicationsFailed(
         error.response.data.message
       )
     );
   }
 };
 
-export const deleteApplication = (id) => async (dispatch) => {
-  dispatch(applicationSlice.actions.deleteApplicationRequest());
+export const deleteSoftwareApplication = (id) => async (dispatch) => {
+  dispatch(
+    softwareApplicationSlice.actions.deletesoftwareApplicationsRequest()
+  );
   try {
-    const { data } = await axios.delete(
+    const response = await axios.delete(
       `http://localhost:4000/api/v1/softwareAppliaction/delete/${id}`,
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
-    dispatch(applicationSlice.actions.deleteApplicationSuccess(data.message));
-    dispatch(applicationSlice.actions.clearAllErrors());
+    dispatch(
+      softwareApplicationSlice.actions.deletesoftwareApplicationsSuccess(
+        response.data.message
+      )
+    );
+    dispatch(softwareApplicationSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(
-      applicationSlice.actions.deleteApplicationFailed(
+      softwareApplicationSlice.actions.deletesoftwareApplicationsFailed(
         error.response.data.message
       )
     );
   }
 };
 
-export const clearAllApplicationErrors = () => (dispatch) => {
-  dispatch(applicationSlice.actions.clearAllErrors());
+export const clearAllSoftwareAppErrors = () => (dispatch) => {
+  dispatch(softwareApplicationSlice.actions.clearAllErrors());
 };
 
-export const resetApplicationSlice = () => (dispatch) => {
-  dispatch(applicationSlice.actions.resetApplicationSlice());
+export const resetSoftwareApplicationSlice = () => (dispatch) => {
+  dispatch(softwareApplicationSlice.actions.resetSoftwareApplicationSlice());
 };
 
-export default applicationSlice.reducer;
+export default softwareApplicationSlice.reducer;
