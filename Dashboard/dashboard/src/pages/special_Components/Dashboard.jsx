@@ -267,7 +267,9 @@ const Dashboard = () => {
                 <Card>
                   <CardHeader className="px-7 flex items-center justify-between flex-row">
                     <CardTitle>Timeline</CardTitle>
-                    <Button className="w-fit">Manage Timeline</Button>
+                    <Link to={"/manage/timeline"}>
+                      <Button className="w-fit">Manage Timeline</Button>
+                    </Link>
                   </CardHeader>
                   <CardContent>
                     <Table>

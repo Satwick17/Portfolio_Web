@@ -133,6 +133,21 @@ export const deleteSkill = (id) => async (dispatch) => {
   }
 };
 
+export const updateSkill = (id, proficiency) => async (dispatch) => {
+  dispatch(skillSlice.actions.addNewSkillRequest());
+  try {
+    const { data } = await axios.put(
+      `http://localhost:4000/api/v1/skill/update/${id}`,
+      { proficiency },
+      { withCredentials: true }
+    );
+    dispatch(skillSlice.actions.addNewSkillSuccess(data.message));
+    dispatch(skillSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(skillSlice.actions.updateSkillFailed(error.response.data.message));
+  }
+};
+
 export const clearAllSkillErrors = () => (dispatch) => {
   dispatch(skillSlice.actions.clearAllErrors());
 };
