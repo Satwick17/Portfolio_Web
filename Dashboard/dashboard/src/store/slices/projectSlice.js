@@ -143,7 +143,7 @@ export const deleteProject = (id) => async (dispatch) => {
 export const updateProject = (id, newData) => async (dispatch) => {
   dispatch(projectSlice.actions.updateProjectSuccess());
   try {
-    const { data } = await axios.put(``, newData, { withCredentials: true });
+    const { data } = await axios.put(`http://localhost:4000/api/v1/project/update/${id}`, newData, { withCredentials: true });
     dispatch(projectSlice.actions.updateProjectSuccess(data.message));
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
