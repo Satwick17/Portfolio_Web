@@ -17,15 +17,7 @@ export const addNewProject = catchAssyncError(async (req, res, next) => {
     technologies,
     deployed,
   } = req.body;
-  if (
-    !title ||
-    !description ||
-    !gitRepoLink ||
-    !projectLink ||
-    !stack ||
-    !technologies ||
-    !deployed
-  ) {
+  if (!title || !description) {
     return next(new Errorhandler("Please Provide All Details!", 400));
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
@@ -120,7 +112,7 @@ export const getAllProject = catchAssyncError(async (req, res, next) => {
   const projects = await Projects.find();
   res.status(200).json({
     success: true,
-    projects,  
+    projects,
   });
 });
 

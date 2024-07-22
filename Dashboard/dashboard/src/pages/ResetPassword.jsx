@@ -36,7 +36,7 @@ const ResetPassword = () => {
     if (isAuthenticated) navigate("/");
     if (message !== null) {
       toast.success(message);
-      dispatch(getUser());
+      navigate("/login");
     }
   }, [dispatch, isAuthenticated, error, loading]);
 

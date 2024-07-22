@@ -11,6 +11,7 @@ import {
   getAllTimeline,
   resetTimelineSlice,
 } from "@/store/slices/timelineSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddTimeline = () => {
   const [title, setTitle] = useState("");
@@ -19,6 +20,7 @@ const AddTimeline = () => {
   const [to, setTo] = useState("");
 
   const { loading, error, message } = useSelector((state) => state.timeline);
+  const navigate = useNavigate();
 
   const handleAddNewTimeline = (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const AddTimeline = () => {
     formData.append("from", from);
     formData.append("to", to);
     dispatch(addNewTimeline(formData));
+    Navigate("/");
   };
 
   const dispatch = useDispatch();
