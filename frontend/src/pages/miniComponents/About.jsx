@@ -30,7 +30,7 @@ const About = () => {
       </div>
       <div className="text-center">
         <p className="uppercase text-xl text-slate-400">
-          Allow me to introduce myself.
+          Here is a glimpse about myself.
         </p>
       </div>
       <div>
@@ -43,20 +43,20 @@ const About = () => {
             />
           </div>
           <div className="flex justify-center flex-col tracking-[1px] text-xl gap-5">
+            <h1>Hey!</h1>
             <p>
-              My name is Zeeshan, but my followers call me Zeeshu. I will
-              graduate in Software Engineering from SMIU around 2024. I work as
-              a web developer and freelancer. My hobbies include watching
-              movies, series, playing video games, and occasionally cooking.
+              My name is Satwick Deep Verma. I'm graduated in Bachelor of Technology(CSE) from MMMUT, Gorakhpur. I work as
+              a web developer and freelancer. My hobbies include reading books, playing games, and occasionally dancing.
             </p>
             <p>
-              I have interests not only in technology but also in movies,
-              series, video games, and cooking. I excel in meeting deadlines for
-              my work.
+              I have interests not only in web development but also in competitive programming and in computer
+              fundamentals like Operating system and DBMS. 
             </p>
           </div>
         </div>
         <p className="tracking-[1px] text-xl">
+          I had a experience as Software Developer Intern and as Student Coordinator
+          of T&P Cell of my college.
           My dedication and perseverance in timely delivery of work are integral
           to me. I maintain the courage to face any challenges for extended
           periods.
